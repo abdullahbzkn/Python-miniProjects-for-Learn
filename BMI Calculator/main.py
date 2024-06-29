@@ -90,6 +90,7 @@ def calculate_bmi():
                           + pad * (label_get_h(my_label) + label_get_h(my_label2) + entry_get_h(my_entry) + entry_get_h(
                             my_entry2) + button_get_h(my_button)))
 
+
 margin = 3
 pad = 2
 score = 0
