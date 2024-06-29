@@ -1,32 +1,35 @@
 import tkinter as tk
+from tkinter import messagebox
 from PIL import Image, ImageTk
 import pybase64
 
 window = tk.Tk()
-window.minsize(500, 800)
 window.title('Secret Notes')
+window.config(padx=80, pady=20)
 
 
 def save_and_encrypt():
     key = my_entry3.get()
-    my_entry3.delete(0, tk.END)
-    my_entry3.focus()
 
-    if key == "tkinter":
-        file_path = open(file="secret notes/secret_notes.txt", mode='a')
-        note_title = my_entry1.get()
-        my_entry1.delete(0, tk.END)
-        file_path.write(note_title)
-        file_path.write("\n")
-        note = my_entry2.get(1.0, tk.END)
-        my_entry2.delete(1.0, tk.END)
-        note = note.encode("ascii")
-        note = pybase64.b64encode(note)
-        note = note.decode("ascii")
-        file_path.write(note)
-        file_path.write("\n")
-
-        file_path.close()
+    if len(my_entry1.get()) == 0 or len(my_entry2.get(1.0,tk.END)) == 0 or len(my_entry3.get()) == 0:
+        messagebox.showinfo('Error!', 'Please enter all')
+    else:
+        my_entry3.delete(0, tk.END)
+        my_entry3.focus()
+        if key == "tkinter":
+            file_path = open(file="secret notes/secret_notes.txt", mode='a')
+            note_title = my_entry1.get()
+            my_entry1.delete(0, tk.END)
+            file_path.write(note_title)
+            file_path.write("\n")
+            note = my_entry2.get(1.0, tk.END)
+            my_entry2.delete(1.0, tk.END)
+            note = note.encode("ascii")
+            note = pybase64.b64encode(note)
+            note = note.decode("ascii")
+            file_path.write(note)
+            file_path.write("\n")
+            file_path.close()
 
 
 def decrypt():
